@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pine2pyne"
+description = "Pine Script v4, v5 and v6 to PyneCore Python transpiler"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "tripolskypetr" }]
+keywords = ["pinescript", "tradingview", "transpiler", "pynecore", "backtesting"]
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+
+# The only dependency is dishka, the DI container that assembles the pipeline (pine2pyne/di.py).
+# The transpiler never imports `pynecore`: that is what the GENERATED scripts import.
+dependencies = ["dishka>=1.4"]
+
+# Single source of truth for the version: pine2pyne/__init__.py
+dynamic = ["version"]
+
+[project.optional-dependencies]
+# `pip install -e ".[test]"`; the runtime test also needs `pip install pynesys-pynecore` and skips without it
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/pine2pyne/"
+Repository = "https://github.com/pine2pyne/pine2pyne"
+
+[project.scripts]
+pine2pyne = "pine2pyne.cli:main"
+
+[tool.setuptools]
+packages = [
+    "pine2pyne",
+    "pine2pyne.core",
+    "pine2pyne.pipeline",
+    "pine2pyne.emit",
+    "pine2pyne.emit.standard",
+    "pine2pyne.emit.standard.passes",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "pine2pyne.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# A SemanticWarning a test does not expect fails it: a test that means to warn says so with pytest.warns.
+filterwarnings = ["error::pine2pyne.errors.SemanticWarning"]

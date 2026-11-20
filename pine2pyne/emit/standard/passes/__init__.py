@@ -1,0 +1,116 @@
+"""Python-AST rewrites from the code generator's spelling to the standard output's."""
+from .annotations import (
+    BuiltinClassNamePass, ClosureHistoryPass, ColorCastPass, DeclarationAnnotationPass, SeriesAnnotationPass,
+)
+from .base import ModulePass, PassContext
+from .builtins import (
+    CurrentValuePass,
+    InputOptionsPass,
+    LegacyHlineStylePass,
+    LegacyLabelStylePass,
+    LegacyLineWidthPass,
+    ArrayFromNaPass,
+    LegacySecurityBarmergePass,
+    LegacyDuplicateFunctionPass,
+    BlockTupleArityPass,
+    LibraryDrawingTypePass,
+    UdtBoolNaArgumentPass,
+    RepeatedKeywordPass,
+    LegacyStrategyDirectionPass,
+    ShadowedNamespacePass,
+    TaSeriesPass,
+)
+from .hoisting import FieldHistoryPass, LegacyIffPass, StrictBooleanHoistingPass
+from .imports import ImportReconciliationPass
+from .legacy_colors import LegacyTransparencyPass
+from .library import LibraryPreamblePass
+from .rewrites import (
+    BlockKeepPass,
+    DeclarationCallShapePass,
+    FlatBoolOpPass,
+    HexColorPass,
+    LegacyExitStopPass,
+    MathNamespacePass,
+    NaBoolFlagPass,
+    StrategyDefaultsPass,
+    SyminfoSymbolPartsPass,
+)
+
+
+def default_passes() -> tuple[ModulePass, ...]:
+    """The standard-layout rewrites in the order they apply; imports are reconciled last."""
+    return (
+        DeclarationCallShapePass(),
+        StrategyDefaultsPass(),
+        NaBoolFlagPass(),
+        SeriesAnnotationPass(),
+        LegacyTransparencyPass(),
+        HexColorPass(),
+        ColorCastPass(),
+        BuiltinClassNamePass(),
+        MathNamespacePass(),
+        LegacyExitStopPass(),
+        TaSeriesPass(),
+        LegacyStrategyDirectionPass(),
+        LegacyLineWidthPass(),
+        CurrentValuePass(),
+        ArrayFromNaPass(),
+        LegacySecurityBarmergePass(),
+        LegacyLabelStylePass(),
+        LegacyHlineStylePass(),
+        InputOptionsPass(),
+        FlatBoolOpPass(),
+        FieldHistoryPass(),
+        LegacyDuplicateFunctionPass(),
+        StrictBooleanHoistingPass(),
+        LegacyIffPass(),
+        DeclarationAnnotationPass(),
+        BlockKeepPass(),
+        ClosureHistoryPass(),
+        ShadowedNamespacePass(),
+        RepeatedKeywordPass(),
+        BlockTupleArityPass(),
+        LibraryDrawingTypePass(),
+        UdtBoolNaArgumentPass(),
+        LibraryPreamblePass(),
+        SyminfoSymbolPartsPass(),
+        ImportReconciliationPass(),
+    )
+
+
+__all__ = [
+    'LibraryPreamblePass',
+    'BlockKeepPass',
+    'SyminfoSymbolPartsPass',
+    'ClosureHistoryPass',
+    'BuiltinClassNamePass',
+    'ColorCastPass',
+    'CurrentValuePass',
+    'InputOptionsPass',
+    'LegacyHlineStylePass',
+    'LegacyLineWidthPass',
+    'ArrayFromNaPass',
+    'LegacySecurityBarmergePass',
+    'LegacyDuplicateFunctionPass',
+    'RepeatedKeywordPass',
+    'LegacyStrategyDirectionPass',
+    'TaSeriesPass',
+    'DeclarationCallShapePass',
+    'FlatBoolOpPass',
+    'HexColorPass',
+    'ImportReconciliationPass',
+    'LegacyIffPass',
+    'LegacyTransparencyPass',
+    'MathNamespacePass',
+    'LegacyExitStopPass',
+    'LegacyLabelStylePass',
+    'DeclarationAnnotationPass',
+    'ModulePass',
+    'NaBoolFlagPass',
+    'PassContext',
+    'SeriesAnnotationPass',
+    'ShadowedNamespacePass',
+    'StrategyDefaultsPass',
+    'StrictBooleanHoistingPass',
+    'default_passes',
+]
