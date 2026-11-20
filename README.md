@@ -13,6 +13,8 @@ for [PyneCore](https://pynecore.org), the open-source runtime that runs Pine-sty
 A converted script can backtest offline on any candles you have, without a TradingView account or
 chart.
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/pine2pyne/pine2pyne)
+
 ## Install
 
 Requires Python 3.11+.
